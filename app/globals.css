@@ -45,6 +45,12 @@
     @apply size-[50px] rounded-full bg-black flex justify-center items-center !important;
   }
 
+  /* details */
+
+  .pink-heading-details {
+    @apply w-full bg-primary min-h-[385px] pattern flex justify-center items-center flex-col py-10 px-6;
+  }
+
   .pattern {
     background-image: linear-gradient(
       to right,
