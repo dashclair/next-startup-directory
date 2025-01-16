@@ -46,9 +46,11 @@ const StartupCard = ({ post }: { post: StartupCardType }) => {
           />
         </Link>
       </div>
-      <Link href={`/startup/${_id}`} className="font-mono mb-4">
-        {description}
-      </Link>
+      <div className="max-h-40 h-full">
+        <Link href={`/startup/${_id}`} className="font-mono mb-4">
+          {description}
+        </Link>
+      </div>
       <img
         src={image}
         alt="placeholder"
