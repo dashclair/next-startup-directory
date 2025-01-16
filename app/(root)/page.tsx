@@ -1,7 +1,6 @@
 import { sanityFetch } from "@/sanity/lib/live";
 import SearchForm from "../components/SearchForm";
 import StartupCard, { StartupCardType } from "../components/StartupCard";
-import { client } from "@/sanity/lib/client";
 import { STARTUPS_QUERY } from "@/sanity/lib/queries";
 
 export default async function Home({
@@ -10,7 +9,9 @@ export default async function Home({
   searchParams: Promise<{ query?: string }>;
 }) {
   const query = (await searchParams).query as string;
-  const { data: posts } = await sanityFetch({ query: STARTUPS_QUERY });
+
+  const params = { search: query || null };
+  const { data: posts } = await sanityFetch({ query: STARTUPS_QUERY, params });
 
   return (
     <>
@@ -21,14 +22,14 @@ export default async function Home({
         <p className="heading">
           Pitch Your Startup, Connect with Entrepreneurs
         </p>
-        <p className="font-sans text-white">
+        <p className="font-mono text-white text-center">
           Submit Ideas, Vote on Pitches, and Get Noticed in Virtual Competitions
         </p>
         <SearchForm query={query} />
       </section>
       <section className="py-10 px-6">
         <p className="text-2xl font-sans font-semibold">
-          {query ? `Search results for ${query}` : "All Startups"}
+          {query ? `Search results for "${query}"` : "All Startups"}
         </p>
         <ul className="mt-7 card_grid">
           {posts?.length > 0 ? (
@@ -36,7 +37,7 @@ export default async function Home({
               <StartupCard key={post._id} post={post} />
             ))
           ) : (
-            <p>no posts found</p>
+            <p className="text-lg font-mono">No posts found</p>
           )}
         </ul>
       </section>
