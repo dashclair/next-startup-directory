@@ -28,9 +28,9 @@ const StartupDetailsPage = async ({
         <p className="heading">{post.title}</p>
         <p className="font-mono text-white text-center">{post.description}</p>
       </section>
-      <section className="py-10 px-6">
-        <img src={post.image} alt="image" />
-        <div className="flex font-sans justify-between mx-auto items-center">
+      <section className="mx-auto py-10 px-6">
+        <img src={post.image} alt="image"className="mx-auto" width={1000} height={500}/>
+        <div className="flex max-w-4xl font-sans justify-between mx-auto items-center">
           <div className="flex gap-5 items-center">
             <Link href={`/user/${post.author?._id}`}>
               <Image
@@ -54,10 +54,10 @@ const StartupDetailsPage = async ({
             {post.category}
           </p>
         </div>
-        <div className="font-sans my-12">
+        <div className="mx-auto max-w-4xl font-sans my-12">
           {parsedContent ? (
             <article
-              className="max-w-4xl prose break-all font-sans"
+              className="max-w-4xl text-cennter prose break-all font-sans"
               dangerouslySetInnerHTML={{ __html: parsedContent }}
             />
           ) : (
