@@ -51,6 +51,10 @@
     @apply w-full bg-primary min-h-[385px] pattern flex justify-center items-center flex-col py-10 px-6;
   }
 
+  .divider {
+    @apply border-dotted bg-zinc-400 max-w-4xl my-10 mx-auto;
+  }
+
   .pattern {
     background-image: linear-gradient(
       to right,

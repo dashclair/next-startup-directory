@@ -2,9 +2,11 @@ import { formatDate } from "@/libs/formatDate";
 import { client } from "@/sanity/lib/client";
 import { STARTUP_BY_ID_QUERY } from "@/sanity/lib/queries";
 import Image from "next/image";
+import Link from "next/link";
 import { notFound } from "next/navigation";
+import markdownit from "markdown-it";
 
-export const experimental_ppr = true;
+const md = markdownit();
 
 const StartupDetailsPage = async ({
   params,
@@ -14,7 +16,7 @@ const StartupDetailsPage = async ({
   const id = (await params).id;
 
   const post = await client.fetch(STARTUP_BY_ID_QUERY, { id });
-  console.log(id);
+  const parsedContent = md.render(post?.pitch || "");
 
   if (!post) return notFound();
   return (
@@ -27,22 +29,42 @@ const StartupDetailsPage = async ({
         <p className="font-mono text-white text-center">{post.description}</p>
       </section>
       <section className="py-10 px-6">
-        <Image src={post.image} alt="image" width={1000} height={530}/>
-        <div>
-          
+        <img src={post.image} alt="image" />
+        <div className="flex font-sans justify-between mx-auto items-center">
+          <div className="flex gap-5 items-center">
+            <Link href={`/user/${post.author?._id}`}>
+              <Image
+                src={post.author?.image as string}
+                alt="placeholder"
+                width={64}
+                height={64}
+                className="rounded-[70px]"
+              />
+            </Link>
+            <div>
+              <p className="text-[20px] font-sans font-bold">
+                {post.author.name}
+              </p>
+              <p className="text-[16px] font-sans font-bold">
+                {post.author.username}
+              </p>
+            </div>
+          </div>
+          <p className="bg-primary-100 rounded-[70px] px-3 py-1">
+            {post.category}
+          </p>
         </div>
-        {/* <p className="text-2xl font-sans font-semibold">
-          {query ? `Search results for "${query}"` : "All Startups"}
-        </p>
-        <ul className="mt-7 card_grid">
-          {posts?.length > 0 ? (
-            posts.map((post: StartupCardType) => (
-              <StartupCard key={post._id} post={post} />
-            ))
+        <div className="font-sans my-12">
+          {parsedContent ? (
+            <article
+              className="max-w-4xl prose break-all font-sans"
+              dangerouslySetInnerHTML={{ __html: parsedContent }}
+            />
           ) : (
-            <p className="text-lg font-mono">No posts found</p>
+            <p className=" font-sans">No result</p>
           )}
-        </ul> */}
+        </div>
+        <hr className="divider"></hr>
       </section>
     </>
   );
