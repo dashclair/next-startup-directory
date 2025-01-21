@@ -1,6 +1,7 @@
 import { ReactNode } from "react";
-import Navbar from "../../components/Navbar";
 import { SanityLive } from "@/sanity/lib/live";
+
+import Navbar from "../../components/Navbar";
 
 export default function Layout({
   children,
