@@ -1,9 +1,12 @@
-import { formatDate } from "@/libs/formatDate";
-import { client } from "@/sanity/lib/client";
-import { STARTUP_BY_ID_QUERY } from "@/sanity/lib/queries";
+import { notFound } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
-import { notFound } from "next/navigation";
+
+import { client } from "@/sanity/lib/client";
+import { STARTUP_BY_ID_QUERY } from "@/sanity/lib/queries";
+
+import { formatDate } from "@/libs/formatDate";
+
 import markdownit from "markdown-it";
 
 const md = markdownit();
