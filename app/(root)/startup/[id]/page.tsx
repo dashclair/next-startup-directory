@@ -32,11 +32,11 @@ const StartupDetailsPage = async ({
         <p className="font-mono text-white text-center">{post.description}</p>
       </section>
       <section className="mx-auto py-10 px-6">
-        <img src={post.image} alt="image"className="mx-auto" width={1000} height={500}/>
+        <Image src={post.image} alt="image"className="mx-auto" width={1000} height={500}/>
         <div className="flex max-w-4xl font-sans justify-between mx-auto items-center">
           <div className="flex gap-5 items-center">
             <Link href={`/user/${post.author?._id}`}>
-              <Image
+              <img
                 src={post.author?.image as string}
                 alt="placeholder"
                 width={64}
