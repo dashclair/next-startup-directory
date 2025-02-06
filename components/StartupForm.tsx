@@ -6,6 +6,7 @@ import { formSchema } from "@/libs/validation";
 
 import { z } from "zod";
 import { useRouter } from "next/navigation";
+import { createIdea } from "@/libs/actions";
 
 const StartupForm = () => {
   const [errors, setErrors] = useState<Record<string, string>>({});
@@ -25,13 +26,13 @@ const StartupForm = () => {
 
       await formSchema.parseAsync(formValues);
 
-    //   const result = await createIdea(prevState, formData, pitch)
+      const result = await createIdea(prevState, formData, pitch);
 
       console.log(formValues);
 
-    //   router.push(`/startup/${result.id}`);
+      router.push(`/startup/${result._id}`);
 
-    //   return result
+      return result;
     } catch (error) {
       if (error instanceof z.ZodError) {
         const fieldErrors = error.flatten().fieldErrors;
