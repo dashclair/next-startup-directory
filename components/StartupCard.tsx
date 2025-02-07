@@ -17,7 +17,7 @@ const StartupCard = ({ post }: { post: StartupCardType }) => {
     author,
   } = post;
   return (
-    <li className="bg-white border-[5px] h-full border-black py-6 px-5 rounded-[22px] shadow-200 font-sans">
+    <li className=" bg-white border-[5px] h-full border-black py-6 px-5 rounded-[22px] shadow-200 font-sans">
       <div className="flex justify-between">
         <p className="rounded-[70px] bg-primary-100 p-3">
           {formatDate(_createdAt)}
@@ -47,8 +47,8 @@ const StartupCard = ({ post }: { post: StartupCardType }) => {
         </Link>
       </div>
       <div className="my-4">
-        <Link href={`/startup/${_id}`} className="font-mono">
-          {description}
+        <Link href={`/startup/${_id}`}>
+          <div className="font-mono line-clamp-3 ">{description}</div>
         </Link>
       </div>
       <Image
@@ -58,7 +58,7 @@ const StartupCard = ({ post }: { post: StartupCardType }) => {
         height={500}
         className=" w-full h-[164px] rounded-[10px] object-cover"
       />
-      <div className="flex justify-between mt-4">
+      <div className="flex justify-between mt-4 ">
         <Link href={`/?query=${category?.toLowerCase()}`}>
           <p>{category}</p>
         </Link>
